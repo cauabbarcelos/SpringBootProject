@@ -22,12 +22,16 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
     public  void atualizarUsuarioPorId(Integer id, Usuario usuario) {
-        Usuario  usuarioEntity = buscarUsuarioPorId(id);
+
+        Usuario  usuarioEntity = usuarioRepository.findById(id).orElseThrow( () ->  new RuntimeException("Id Not Found"));
+
         Usuario usuarioAtualizado = Usuario.builder()
                 .id(usuarioEntity.getId())
                 .nome(usuario.getNome() != null ? usuario.getNome() :  usuarioEntity.getNome())
-                .email(usuarioEntity.getEmail() != null ? usuarioEntity.getEmail() :  usuarioEntity.getEmail())
+                .email(usuarioEntity.getEmail())
                 .build();
+
+        usuarioRepository.saveAndFlush(usuarioAtualizado);
     }
 
 
