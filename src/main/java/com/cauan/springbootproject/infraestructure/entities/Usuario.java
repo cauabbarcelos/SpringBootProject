@@ -8,13 +8,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name =  "usuario")
+@Table(name = "usuario")
 @Entity
 
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id" , unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "email" , unique = true)

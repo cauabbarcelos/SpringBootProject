@@ -9,24 +9,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/usario")
+@RequestMapping("/usuario")
 @RequiredArgsConstructor
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> salvarUsario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Void> salvarUsario(@RequestBody Usuario usuario) {
         usuarioService.salvarUsuario(usuario);
         return ResponseEntity.ok().build();
     }
     @GetMapping
-    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam Integer id) {
+    public ResponseEntity<Usuario> buscarUsuarioPorId(@RequestParam Integer id) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorId(id ));
     }
     @DeleteMapping
-    public ResponseEntity<Usuario> deletarUsuarioPorId(@RequestParam Integer id) {
+    public ResponseEntity<Void> deletarUsuarioPorId(@RequestParam Integer id) {
         usuarioService.deleteUsuarioPorId(id);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping
+    public ResponseEntity<Void>  atualizarUsuarioPorId(@RequestParam Integer id, @RequestBody Usuario usuario) {
+        usuarioService.atualizarUsuarioPorId(id , usuario);
         return ResponseEntity.ok().build();
     }
 }

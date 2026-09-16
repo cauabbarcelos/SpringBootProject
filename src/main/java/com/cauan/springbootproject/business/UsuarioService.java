@@ -12,8 +12,8 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-    public void salvarUsuario(Usuario usario) {
-        usuarioRepository.saveAndFlush(usario);
+    public void salvarUsuario(Usuario usuario) {
+        usuarioRepository.saveAndFlush(usuario);
     }
     public Usuario  buscarUsuarioPorId(Integer id){
         return usuarioRepository.findById(id).orElseThrow( () ->  new RuntimeException("Id Not Found"));
@@ -26,6 +26,7 @@ public class UsuarioService {
         Usuario  usuarioEntity = usuarioRepository.findById(id).orElseThrow( () ->  new RuntimeException("Id Not Found"));
 
         Usuario usuarioAtualizado = Usuario.builder()
+
                 .id(usuarioEntity.getId())
                 .nome(usuario.getNome() != null ? usuario.getNome() :  usuarioEntity.getNome())
                 .email(usuarioEntity.getEmail())
